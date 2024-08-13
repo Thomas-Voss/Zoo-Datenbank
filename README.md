@@ -4,9 +4,10 @@ Dieses Projekt ist ein im Rahmen einer Fortbildung erstelltes Übungsprojekt von
 
 Das Projekt beinhaltet die folgenden Schritte:
  - Anforderungsmanagement
- - Erstellung eines ERM für die Datenbank, Star für Data Mart
- - Umsetzung der Datenbank in SQL
- - Schreiben eines Data Dictionary
+ - Erstellung eines ERM für die Datenbank
+ - Umsetzung der operativen Datenbank in SQL
+ - Dokumentation der Datenbank in einem Data Dictionary
+ - Erarbeitung eines Konzepts für ein Data Warehouse
  - Erstellung eines Data Quality Konzepts
 
 ## Anforderungsmanagement
