@@ -15,8 +15,13 @@ Das Projekt beinhaltet die folgenden Schritte:
 
 ## Modellierung
  Auf Basis der Anforderungen haben wir ein ERM erstellt, das die Grundlage für die Datenbank bildet. Für ein genaueres und inhaltliches Verständnis der Datenbank haben wir ein Data Dictionary geschrieben. Zusätzlich haben wir für ein Data Warehouse ein ERM für einen Data Vault zusammen mit einem exemlarischen Star-Schema erstellt.
- 
+
+ ### ERM operative Datenbank
  ![Zoo_ERD_Final_V1](https://github.com/user-attachments/assets/8a948b31-ba8c-438d-abd5-fe066877426c)
+
+ ### ERM Data Vault
+ ![Zoo_DWH drawio](https://github.com/user-attachments/assets/40cc25fa-2d80-492d-9d8f-9e100dbdb46d)
+
  
 ## Erstellung der Datenbank
  Das ERM haben wir in eine in SQLite geschriebene Datenbank umgesetzt. Dabei haben wir auch Referenzwerte sowie Testdaten eingefügt. Mithilfe von Python-Skripten wurde überprüft, ob die erstellte Datenbank mit dem Data Dictionary und dem ERM übereinstimmt.
