@@ -17,7 +17,7 @@ Das Projekt beinhaltet die folgenden Schritte:
  Auf Basis der Anforderungen haben wir ein ERM erstellt, das die Grundlage für die Datenbank bildet. Für ein genaueres und inhaltliches Verständnis der Datenbank haben wir ein Data Dictionary geschrieben. Ein weiteres exemplarisches ERM im Star-Schema haben wir für einen potenziellen Data Mart erstellt.
 
 ## Erstellung der Datenbank
- Das ERM haben wir in eine in SQL geschriebene Datenbank umgesetzt. Dabei haben wir auch Referenzwerte sowie Testdaten eingefügt. Mithilfe von Python-Skripten wurde überprüft, ob die erstellte Datenbank mit dem Data Dictionary und dem ERM übereinstimmt.
+ Das ERM haben wir in eine in SQLite geschriebene Datenbank umgesetzt. Dabei haben wir auch Referenzwerte sowie Testdaten eingefügt. Mithilfe von Python-Skripten wurde überprüft, ob die erstellte Datenbank mit dem Data Dictionary und dem ERM übereinstimmt.
 
 ## Data Quality
  Um die Anforderungen an eine hohe Datenqualität sicherzustellen, haben wir ein Datenqualitätskonzept für den operativen Betrieb des Kunden ausgearbeitet.
