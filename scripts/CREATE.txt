@@ -1,0 +1,402 @@
+CREATE TABLE "Ref_Anrede" (
+	"Anrede_ID"	INTEGER NOT NULL,
+	"Anrede"	TEXT(4) NOT NULL,
+	PRIMARY KEY("Anrede_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Ref_Einheiten_Futter" (
+"Futtereinheit_ID" INTEGER NOT NULL,
+"Futtereinheit" TEXT(6) NOT NULL,
+PRIMARY KEY("Futtereinheit_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Ref_Einheiten_Gewicht" (
+	"GewichtEinheit_ID"	INTEGER NOT NULL,
+	"Gewichtseinheit"	TEXT(2) NOT NULL,
+	PRIMARY KEY("GewichtEinheit_Id" AUTOINCREMENT)
+);
+CREATE TABLE "Ref_Einheiten_Groesse_Gehege" (
+	"GroesseGehege_ID"	INTEGER NOT NULL,
+	"Groesseneinheit"	TEXT(2) NOT NULL,
+	PRIMARY KEY("GroesseGehege_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Ref_Einheiten_Groesse_Tiere" (
+"GroesseTiere_ID" INTEGER NOT NULL,
+"Groesseneinheit" TEXT(2) NOT NULL,
+PRIMARY KEY("GroesseTiere_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Ref_Geschlecht_Mitarbeiter" (
+	"GeschlechtMitarbeiter_ID"	INTEGER NOT NULL,
+	"Geschlecht"	TEXT(8) NOT NULL,
+	PRIMARY KEY("GeschlechtMitarbeiter_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Ref_Geschlecht_Tier" (
+	"GeschlechtTier_ID"	INTEGER NOT NULL,
+	"Geschlecht"	TEXT(8) NOT NULL,
+	PRIMARY KEY("GeschlechtTier_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Ref_JaNein" (
+	"JaNein_ID"	INTEGER NOT NULL,
+	"JaNein"	TEXT(4) NOT NULL,
+	PRIMARY KEY("JaNein_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Ref_Land" (
+	"Land_ID"	INTEGER NOT NULL,
+	"Land"	TEXT(44) NOT NULL,
+	PRIMARY KEY("Land_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Ref_MwSt_Satz" (
+	"MwSt_ID"	INTEGER NOT NULL,
+	"MwStSatz"	INTEGER NOT NULL,
+	PRIMARY KEY("MwSt_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Ref_PLZ_Orte" (
+	"PLZOrt_ID"	INTEGER NOT NULL,
+	"PLZ"	TEXT(5) NOT NULL,
+	"Ort"	TEXT(34) NOT NULL,
+	"Ortsteil_1"	TEXT(40),
+	"Ortsteil_2"	TEXT(24),
+	PRIMARY KEY("PLZOrt_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Ref_Titel" (
+	"Titel_ID"	INTEGER NOT NULL,
+	"Titel"	TEXT(9) NOT NULL,
+	PRIMARY KEY("Titel_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Ref_Vertretungsgrund" (
+	"Vertretungsgrund_ID"	INTEGER NOT NULL,
+	"Vertretungsgrund"	TEXT(15) NOT NULL,
+	PRIMARY KEY("Vertretungsgrund_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Ref_Waehrungen" (
+	"Waehrungs_ID"	INTEGER NOT NULL,
+	"Waehrung"	TEXT(20) NOT NULL,
+	PRIMARY KEY("Waehrungs_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Tiergattungen" (
+	"Tiergattung_ID"	INTEGER NOT NULL,
+	"Gattungsname"	TEXT(80) NOT NULL,
+	"Gattungsinfo"	TEXT(1000),
+	PRIMARY KEY("Tiergattung_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Tierarten" (
+	"Tierart_ID"	INTEGER NOT NULL,
+	"Lebensraum"	TEXT(200),
+	"Verhalten"	TEXT(1000),
+	"Besonderheiten"	TEXT(1000),
+	"Tiergattung_ID"	INTEGER,
+	"Abstammung"	TEXT(1000),
+	"verwandte_Arten"	TEXT(500),
+	PRIMARY KEY("Tierart_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Tiere" (
+	"Tier_ID"	INTEGER NOT NULL,
+	"Name"	TEXT,
+	"GeschlechtTier"	TEXT(9) NOT NULL,
+	"Tierart_ID"	INTEGER NOT NULL,
+	"Vater"	INTEGER,
+	"Mutter"	INTEGER,
+	"Groesse"	REAL,
+	"Groesseneinheit"	TEXT(2),
+	"Gewicht"	REAL,
+	"Gewichtseinheit"	TEXT(2),
+	"Tiernummer"	TEXT(10),
+	"Geburtsdatum"	DATE,
+	"Sterbedatum"	DATE,
+	"Herkunft"	TEXT(100),
+	"Im_Zoo_seit"	DATE,
+	"Im_Zoo_geboren"	TEXT(4),
+	"Bemerkungen"	TEXT(2000),
+	FOREIGN KEY("Vater") REFERENCES "Tiere",
+	FOREIGN KEY("Mutter") REFERENCES "Tiere",
+	FOREIGN KEY("Tierart_ID") REFERENCES "Tierarten",
+	PRIMARY KEY("Tier_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Tierhistorien" (
+	"Tierhistorie_ID"	INTEGER NOT NULL,
+	"Von"	DATE,
+	"Bis"	DATE,
+	"Station"	TEXT(50),
+	"Bemerkung"	Text(2000),
+	"Tier_ID"	INTEGER NOT NULL,
+	FOREIGN KEY("Tier_ID") REFERENCES "Tiere",
+	PRIMARY KEY("Tierhistorie_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Unvertraeglichkeiten" (
+	"Unvertraeglichkeit_ID"	INTEGER NOT NULL,
+	"Tier1_ID"	INTEGER NOT NULL,
+	"Tier2_ID"	INTEGER NOT NULL,
+	"Bemerkung"	TEXT(1000),
+	PRIMARY KEY("Unvertraeglichkeit_ID" AUTOINCREMENT),
+	FOREIGN KEY("Tier2_ID") REFERENCES "Tiere",
+	FOREIGN KEY("Tier1_ID") REFERENCES "Tiere"
+);
+CREATE TABLE "Tieraerzte" (
+	"Tierarzt_ID"	INTEGER NOT NULL,
+	"Anrede"	TEXT(4),
+	"Titel"	TEXT(9),
+	"Vorname"	TEXT(30) NOT NULL,
+	"Nachname"	TEXT(30) NOT NULL,
+	"Strasse"	TEXT(40) NOT NULL,
+	"Hausnummer"	TEXT(10) NOT NULL,
+	"PLZ"	TEXT(10) NOT NULL,
+	"Ort"	TEXT(58) NOT NULL,
+	"Land"	TEXT(44) NOT NULL,
+	"TelNr_fest"	TEXT(20),
+	"TelNr_mobil"	TEXT(20),
+	"FaxNr"	TEXT(20),
+	"Email"	TEXT(40),
+	"Praxisname"	TEXT(50),
+	"Ansprechpartner"	TEXT(60),
+	"Bankverbindung"	TEXT(40),
+	"Taetig_seit"	DATE,
+	"Bemerkungen"	TEXT(1000),
+	"UmsatzsteuerID"	TEXT(14),
+	PRIMARY KEY("Tierarzt_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Vertretung_Aerzte" (
+	"Vertretung_Aerzte_ID"	INTEGER NOT NULL,
+	"Vertretung_aktiv"	INTEGER NOT NULL,
+	"Vertretung_passiv"	INTEGER NOT NULL,
+	"Bemerkung"	TEXT(1000),
+	"Von"	DATE NOT NULL,
+	"Bis"	DATE,
+	PRIMARY KEY("Vertretung_Aerzte_ID" AUTOINCREMENT),
+	FOREIGN KEY("Vertretung_aktiv") REFERENCES "Tieraerzte",
+	FOREIGN KEY("Vertretung_passiv") REFERENCES "Tieraerzte"
+);
+
+CREATE TABLE "Krankenakten" (
+	"Krankenakte_ID"	INTEGER NOT NULL,
+	"Tier_ID"	INTEGER NOT NULL,
+	"Tierarzt_ID"	INTEGER NOT NULL,
+	"Behandlungsgrund"	TEXT(500),
+	"Behandlungsabschluss"	DATE,
+	"Befund"	TEXT(9000),
+	"meldepflichtig"	TEXT(4),
+	"Medikation"	TEXT(2000),
+	"Behandlungsdatum"	DATE,
+	"Bemerkung"	TEXT(2000),
+	FOREIGN KEY("Tier_ID") REFERENCES "Tiere",
+	FOREIGN KEY("Tierarzt_ID") REFERENCES "Tieraerzte",
+	PRIMARY KEY("Krankenakte_ID" AUTOINCREMENT)
+);
+
+CREATE TABLE "Mitarbeiter" (
+	"Mitarbeiter_ID"	INTEGER NOT NULL,
+	"Anrede"	TEXT(4),
+	"Titel"	TEXT(9),
+	"Vorname"	TEXT(30) NOT NULL,
+	"Nachname"	TEXT(30) NOT NULL,
+	"Strasse"	TEXT(40) NOT NULL,
+	"Hausnummer"	TEXT(10) NOT NULL,
+	"PLZ"	TEXT(10) NOT NULL,
+	"Ort"	TEXT(58) NOT NULL,
+	"TelNr_fest"	TEXT(20),
+	"TelNr_mobil"	TEXT(20),
+	"FaxNr"	TEXT(20),
+	"Email"	TEXT(40),
+	"Einstellungsdatum"	DATE,
+	"Geb_Datum"	DATE,
+	"Geb_Ort"	TEXT(50),
+	"Nationalitaet"	TEXT(50),
+	"Sozialstatus"	TEXT(11),
+	"Bemerkungen"	TEXT(2000),
+	"Lohnsteuerklasse"	TEXT(3),
+	"MitarbeiterNr"	TEXT(5),
+	"GeschlechtMitarbeiter"	TEXT(8),
+	PRIMARY KEY("Mitarbeiter_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Vertretung_Mitarbeiter" (
+	"Vertretung_Mitarbeiter_ID"	INTEGER NOT NULL,
+	"Vertretung_aktiv"	INTEGER NOT NULL,
+	"Vertretung_passiv"	INTEGER NOT NULL,
+	"Vertretungsgrund"	TEXT(15),
+	"Von"	DATE NOT NULL,
+	"Bis"	DATE,
+	FOREIGN KEY("Vertretung_passiv") REFERENCES "Mitarbeiter",
+	FOREIGN KEY("Vertretung_aktiv") REFERENCES "Mitarbeiter",
+	PRIMARY KEY("Vertretung_Mitarbeiter_ID" AUTOINCREMENT)
+);
+CREATE TABLE "PflegerTAZuordnung" (
+	"PflegerTAZuordnung_ID"	INTEGER NOT NULL,
+	"Mitarbeiter_ID"	INTEGER NOT NULL,
+	"Tierart_ID"	INTEGER NOT NULL,
+	FOREIGN KEY("Tierart_ID") REFERENCES "Tierarten",
+	FOREIGN KEY("Mitarbeiter_ID") REFERENCES "Mitarbeiter",
+	PRIMARY KEY("PflegerTAZuordnung_ID")
+);
+CREATE TABLE "PflegerTierZuordnung" (
+	"PflegerTierZuordnung_ID"	INTEGER NOT NULL,
+	"Mitarbeiter_ID"	INTEGER NOT NULL,
+	"Tier_ID"	INTEGER NOT NULL,
+	FOREIGN KEY("Mitarbeiter_ID") REFERENCES "Mitarbeiter",
+	FOREIGN KEY("Tier_ID") REFERENCES "Tiere",
+	PRIMARY KEY("PflegerTierZuordnung_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Gebaeude" (
+	"Gebaeude_ID"	INTEGER NOT NULL,
+	"Name"	TEXT(30) NOT NULL,
+	"Ortsbeschreibung"	TEXT(100),
+	"Anzahl_Stockwerke"	INTEGER,
+	PRIMARY KEY("Gebaeude_ID" AUTOINCREMENT)
+);
+
+CREATE TABLE "Lagerorte" (
+	"Lager_ID"	INTEGER NOT NULL,
+	"Lagername"	TEXT(30) NOT NULL,
+	"Gebaeude_ID"	INTEGER NOT NULL,
+	"Stockwerk"	TEXT(15),
+	FOREIGN KEY("Gebaeude_ID") REFERENCES "Gebaeude",
+	PRIMARY KEY("Lager_ID")
+);
+CREATE TABLE "Futterart" (
+	"Futterart_ID"	INTEGER NOT NULL,
+	"Futterart"	TEXT(60) NOT NULL,
+	"Bemerkungen"	TEXT(1000),
+	PRIMARY KEY("Futterart_ID")
+);
+CREATE TABLE "Futter" (
+	"Futter_ID"	INTEGER NOT NULL,
+	"Futterbezeichnung"	TEXT(50) NOT NULL,
+	"Bemerkungen"	TEXT(1000),
+	"Futterart_ID"	INTEGER NOT NULL,
+	PRIMARY KEY("Futter_ID" AUTOINCREMENT),
+	FOREIGN KEY("Futterart_ID") REFERENCES "Futterart"
+);
+CREATE TABLE "Futterlieferanten" (
+	"Futterlieferant_ID"	INTEGER NOT NULL,
+	"Titel"	TEXT(9),
+	"Anrede" TEXT(4),
+	"Vorname"	TEXT(30),
+	"Nachname"	TEXT(30),
+	"Firma"	TEXT(50) NOT NULL,
+	"Strasse"	TEXT(40) NOT NULL,
+	"Hausnummer"	TEXT(10) NOT NULL,
+	"PLZ"	TEXT(10) NOT NULL,
+	"Ort"	TEXT(58) NOT NULL,
+	"Land"	TEXT(44) NOT NULL,
+	"TelNr_fest"	TEXT(20),
+	"TelNr_mobil"	TEXT(20),
+	"FaxNr"	TEXT(20),
+	"Email"	TEXT(40),
+	"Ansprechpartner"	TEXT(60),
+	"Taetig_seit"	DATE,
+	"Bankverbindung"	TEXT(50),
+	"UmsatzsteuerID"	TEXT(14),
+	"Bemerkungen"	TEXT(1000),
+	PRIMARY KEY("Futterlieferant_ID" AUTOINCREMENT)
+);
+
+CREATE TABLE "Futterlieferungen" (
+	"Futterlieferung_ID"	INTEGER NOT NULL,
+	"Lieferanten_ID"	INTEGER NOT NULL,
+	"Futter_ID"	INTEGER NOT NULL,
+	"Preis"	REAL NOT NULL,
+	"Waehrung"	TEXT(20) NOT NULL,
+	"Datum"	DATE NOT NULL,
+	"Menge"	REAL NOT NULL,
+	"Rabatt"	REAL NOT NULL,
+	"Futtereinheit"	TEXT(6) NOT NULL,
+	FOREIGN KEY("Lieferanten_ID") REFERENCES "Futterlieferanten",
+	FOREIGN KEY("Futter_ID") REFERENCES "Futter",
+	PRIMARY KEY("Futterlieferung_ID" AUTOINCREMENT)
+);
+
+CREATE TABLE "Lagerbestaende" (
+	"Lagerbestands_ID"	INTEGER NOT NULL,
+	"Futter_ID"	INTEGER NOT NULL,
+	"Lager_ID"	INTEGER NOT NULL,
+	"Lagerbestand"	REAL NOT NULL,
+	"Zeitpunkt_Aktualisierung"	DATETIME NOT NULL,
+	"Futtereinheit"	TEXT(6),
+	FOREIGN KEY("Futter_ID") REFERENCES "Futter",
+	FOREIGN KEY("Lager_ID") REFERENCES "Lagerorte",
+	PRIMARY KEY("Lagerbestands_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Meldebestaende" (
+	"Meldebestand_ID"	INTEGER NOT NULL,
+	"Futter_ID"	INTEGER NOT NULL,
+	"Lager_ID"	INTEGER NOT NULL,
+	"Meldebestand"	REAL NOT NULL,
+	"Futtereinheit"	TEXT(6) NOT NULL,
+	PRIMARY KEY("Meldebestand_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Mahlzeiten" (
+	"Mahlzeit_ID"	INTEGER NOT NULL,
+	"Mahlzeitname"	TEXT(30) NOT NULL,
+	PRIMARY KEY("Mahlzeit_ID" AUTOINCREMENT)
+);
+CREATE TABLE "FutterMahlzeit" (
+	"FutterMahlzeit_ID"	INTEGER NOT NULL,
+	"Mahlzeit_ID"	INTEGER NOT NULL,
+	"Futter_ID"	INTEGER NOT NULL,
+	"Menge"	REAL NOT NULL,
+	"Futtereinheit"	TEXT(6) NOT NULL,
+	PRIMARY KEY("FutterMahlzeit_ID" AUTOINCREMENT),
+	FOREIGN KEY("Futter_ID") REFERENCES "Futter",
+	FOREIGN KEY("Mahlzeit_ID") REFERENCES "Mahlzeiten"
+);
+
+CREATE TABLE "Fuetterungen" (
+	"Fuetterung_ID"	INTEGER NOT NULL,
+	"Mahlzeit_ID"	INTEGER NOT NULL,
+	"Tier_ID"	INTEGER NOT NULL,
+	"Fuetter_Zeitpunkt"	DATETIME NOT NULL,
+	PRIMARY KEY("Fuetterung_ID" AUTOINCREMENT),
+	FOREIGN KEY("Mahlzeit_ID") REFERENCES "Mahlzeiten"
+);
+CREATE TABLE "Gehegearten" (
+	"Gehegeart_ID"	INTEGER NOT NULL,
+	"Name"	TEXT(40) NOT NULL,
+	"GroesseEinheit"	TEXT(2),
+	PRIMARY KEY("Gehegeart_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Gehege" (
+	"Gehege_ID"	INTEGER NOT NULL,
+	"Gehegeart_ID"	INTEGER NOT NULL,
+	"Name"	TEXT(30) NOT NULL,
+	"Groesse"	REAL,
+	"Position"	TEXT(200),
+	"Bemerkung"	TEXT(2000),
+	"Baujahr"	INTEGER,
+	FOREIGN KEY("Gehegeart_ID") REFERENCES "Gehegearten",
+	PRIMARY KEY("Gehege_ID" AUTOINCREMENT)
+);
+CREATE TABLE "GebaeudeGehegeZuordnung" (
+	"GGZu_ID"	INTEGER NOT NULL,
+	"Gehege_ID"	INTEGER NOT NULL,
+	"Gebaeude_ID"	INTEGER NOT NULL,
+	"Stockwerk"	TEXT(15),
+	FOREIGN KEY("Gebaeude_ID") REFERENCES "Gebaeude",
+	PRIMARY KEY("GGZu_ID" AUTOINCREMENT),
+	FOREIGN KEY("Gehege_ID") REFERENCES "Gehege"
+);
+CREATE TABLE "Rundwege" (
+	"Rundweg_ID"	INTEGER NOT NULL,
+	"RundwegName"	TEXT(50),
+	"Farbcode"	TEXT(20),
+	"Barrierefrei"	TEXT(4),
+	"Laenge"	REAL,
+	"Dauer"	REAL,
+	PRIMARY KEY("Rundweg_ID" AUTOINCREMENT)
+);
+CREATE TABLE "Abschnitte" (
+	"Abschnitts_ID"	INTEGER NOT NULL,
+	"Startpunkt_ID"	INTEGER NOT NULL,
+	"Endpunkt_ID"	INTEGER NOT NULL,
+	"Rundweg_ID"	INTEGER NOT NULL,
+	FOREIGN KEY("Startpunkt_ID") REFERENCES "Gehege",
+	PRIMARY KEY("Abschnitts_ID"),
+	FOREIGN KEY("Endpunkt_ID") REFERENCES "Gehege",
+	FOREIGN KEY("Rundweg_ID") REFERENCES "Rundwege"
+);
+CREATE TABLE "Gehege_Zeitplaene" (
+	"Gehege_Zeitplan_ID"	INTEGER NOT NULL,
+	"Tier_ID"	INTEGER NOT NULL,
+	"Gehege_ID"	INTEGER NOT NULL,
+	"Beschreibung"	TEXT(1000),
+	"Von"	DATE NOT NULL,
+	"Bis"	DATE NOT NULL,
+	FOREIGN KEY("Gehege_ID") REFERENCES "Gehege",
+	FOREIGN KEY("Tier_ID") REFERENCES "Tiere",
+	PRIMARY KEY("Gehege_Zeitplan_ID" AUTOINCREMENT)
+);
