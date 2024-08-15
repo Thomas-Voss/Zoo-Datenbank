@@ -14,7 +14,7 @@ Das Projekt beinhaltet die folgenden Schritte:
  Der fiktive Kunde (Dozent des Kurses) hat zunächst ein Dokument mit seinen Vorstellungen und Wünschen für die Datenbank bereitgestellt. Da dieses Dokument in Teilen unpräzise und unvollständig war, haben wir die Anforderungen in einem weiteren Gespräch mit dem Kunden präzisiert und dokumentiert.
 
 ## Modellierung
- Auf Basis der Anforderungen haben wir ein ERM erstellt, das die Grundlage für die Datenbank bildet. Für ein genaueres und inhaltliches Verständnis der Datenbank haben wir ein Data Dictionary geschrieben. Ein weiteres exemplarisches ERM im Star-Schema haben wir für einen potenziellen Data Mart erstellt.
+ Auf Basis der Anforderungen haben wir ein ERM erstellt, das die Grundlage für die Datenbank bildet. Für ein genaueres und inhaltliches Verständnis der Datenbank haben wir ein Data Dictionary geschrieben. Zusätzlich haben wir für ein Data Warehouse ein ERM für einen Data Vault zusammen mit einem exemlarischen Star-Schema erstellt.
  
  ![Zoo_ERD_Final_V1](https://github.com/user-attachments/assets/8a948b31-ba8c-438d-abd5-fe066877426c)
  
