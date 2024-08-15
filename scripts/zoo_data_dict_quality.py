@@ -8,8 +8,8 @@ import CREATE_dict as CD
 """
 
 def check_text_from_drawio_export():
-    """extract text of drawio with build-in text plugin and save into text.txt
-    phrases the text into a pd.Dataframe with 2 columns for [table_name : field_name] 
+    """extract text of .drawio with build-in text plugin and save into text.txt
+    parses the text into a pd.Dataframe with 2 columns for [table_name : field_name] 
 
     Returns:
         pd.Dataframe : _description_
