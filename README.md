@@ -22,7 +22,9 @@ Das Projekt beinhaltet die folgenden Schritte:
  ### ERM Data Vault
  ![Zoo_DWH drawio](https://github.com/user-attachments/assets/40cc25fa-2d80-492d-9d8f-9e100dbdb46d)
 
- 
+### ERM Star Data Mart
+ ![Zoo_DWH_Star drawio](https://github.com/user-attachments/assets/272ff47e-ab06-49b6-91de-7881322c0140)
+
 ## Erstellung der Datenbank
  Das ERM haben wir in eine in SQLite geschriebene Datenbank umgesetzt. Dabei haben wir auch Referenzwerte sowie Testdaten eingefügt. Mithilfe von Python-Skripten wurde überprüft, ob die erstellte Datenbank mit dem Data Dictionary und dem ERM übereinstimmt.
 
